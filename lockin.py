@@ -25,7 +25,7 @@ def makeFig():
     
     file.writelines("%e,%e,%e,%e,%e,%e,%e,%e,%e,%e,\n" % (x, y, x_fft0, y_fft0, x_bessel, y_bessel, x_butter, y_butter, temp, pot))
 
-    R_psd.append(np.sqrt(np.power(x_butter_900, 2) + np.power(y_butter_900, 2)))
+    R_psd.append(np.sqrt(np.power(x_butter, 2) + np.power(y_butter, 2)))
     R.append(np.sqrt(np.power(x, 2) + np.power(y, 2)))
 
     plt.subplot(2,1,1)
