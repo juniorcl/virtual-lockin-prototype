@@ -7,52 +7,13 @@ from scipy.signal import bessel, filtfilt, butter
 import numpy as np
 import wave
 
-def lowPassAll(sinal, REFSIG, RATE, ORDER, ROLL):
-
-    CUTOFF_100 = 100
-    CUTOFF_200 = 200
-    CUTOFF_300 = 300
-    CUTOFF_400 = 400
-    CUTOFF_500 = 500
-    CUTOFF_600 = 600
-    CUTOFF_700 = 700
-    CUTOFF_800 = 800
-    CUTOFF_900 = 900
-    CUTOFF_1000 = 1000
+def lowPassFilter(sinal, REFSIG, RATE, ORDER, ROLL, CUTOFF):
     
-
     y_fft0, x_fft0 = freq0fftPSD(sinal, REFSIG, RATE, ROLL)
-    y_bessel, x_bessel = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_100, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter, x_butter = lowButterPSD(sinal, REFSIG, RATE, CUTOFF_100, ORDER, ROLL)
+    y_bessel, x_bessel = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF, ORDER, ROLL)
+    y_butter, x_butter = lowButterPSD(sinal, REFSIG, RATE, CUTOFF, ORDER, ROLL)
 
-    y_bessel_200, x_bessel_200 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_200, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_200, x_butter_200 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_200, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_300, x_bessel_300 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_300, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_300, x_butter_300 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_300, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_400, x_bessel_400 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_400, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_400, x_butter_400 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_400, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    
-    y_bessel_500, x_bessel_500 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_500, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_500, x_butter_500 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_500, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    
-    y_bessel_600, x_bessel_600 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_600, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_600, x_butter_600 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_600, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_700, x_bessel_700 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_700, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_700, x_butter_700 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_700, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_800, x_bessel_800 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_800, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_800, x_butter_800 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_800, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_900, x_bessel_900 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_900, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_900, x_butter_900 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_900, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    y_bessel_1000, x_bessel_1000 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_1000, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-    y_butter_1000, x_butter_1000 = lowBesselPSD(sinal, REFSIG, RATE, CUTOFF_1000, ORDER, ROLL) #faz o psd com o filtro passa-baixo
-
-    return x_fft0, y_fft0, x_bessel, y_bessel, x_butter, y_butter, x_bessel_200, y_bessel_200, x_butter_200, y_butter_200, x_bessel_300, y_bessel_300, x_butter_300, y_butter_300, x_bessel_400, y_bessel_400, x_butter_400, y_butter_400, x_bessel_500, y_bessel_500, x_butter_500, y_butter_500, x_bessel_600, y_bessel_600, x_butter_600, y_butter_600, x_bessel_700, y_bessel_700, x_butter_700, y_butter_700, x_bessel_800, y_bessel_800, x_butter_800, y_butter_800, x_bessel_900, y_bessel_900, x_butter_900, y_butter_900, x_bessel_1000, y_bessel_1000, x_butter_1000, y_butter_1000
+    return x_fft0, y_fft0, x_bessel, y_bessel, x_butter, y_butter
 
 def refSignal(file, chunk):
     wf = wave.open(file, 'rb')
